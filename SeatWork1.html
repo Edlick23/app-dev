@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Location Map</title>
+    <style>
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+navigator.geolocation.getCurrentPosition(position => {
+    const {latitude, longitude} = position.coords;
+    
+    // Embed Google Maps iframe centered at the user's current latitude and longitude
+    const mapIframe = `<iframe width="700" height="300" 
+                        src="https://maps.google.com/maps?q=${latitude},${longitude}&amp;z=15&amp;output=embed" 
+                        frameborder="0" style="border:0" allowfullscreen></iframe>`;
+    
+    // Set the iframe inside the map div
+    document.getElementById('map').innerHTML = mapIframe;
+});
+</script>
+
+</body>
+</html>
